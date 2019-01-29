@@ -32,5 +32,5 @@ skip-cleanup: true
 github-token: $GITHUB_TOKEN # Set in travis-ci.org dashboard, marked secure
 keep-history: true
 local-dir: public
-repo: fxb577328725/fxb577328725.github.io # 你的GitHub Page仓库地址
+repo: git@github.com:ccsert/ccsert.github.io.git # 你的GitHub Page仓库地址
 target-branch: master
