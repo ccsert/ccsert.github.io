@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>byblog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-01-29T08:37:06.680Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>ccsert</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>虚拟机下Linux基本安装</title>
+    <link href="http://yoursite.com/2019/01/29/%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8BLinux%E5%9F%BA%E6%9C%AC%E5%AE%89%E8%A3%85/"/>
+    <id>http://yoursite.com/2019/01/29/虚拟机下Linux基本安装/</id>
+    <published>2019-01-29T07:21:18.000Z</published>
+    <updated>2019-01-29T08:37:06.680Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一步：工具准备"><a href="#第一步：工具准备" class="headerlink" title="第一步：工具准备"></a>第一步：工具准备</h2><p>所需要的工具有，vm虚拟机安装包，centos7发行版本，ok就这些，这里选择centos发行版本的原因是一般企业级的服务器都是他，7版本是最新版本，很多企业级也开始更换为最新版本。</p><p>这里我提供centos和vm虚拟机破解版的百度网盘链接 链接: <a href="https://pan.baidu.com/s/1oU26U89LP71OMX1PGfkHTg" target="_blank" rel="noopener">https://pan.baidu.com/s/1oU26U89LP71OMX1PGfkHTg</a> 提取码: 98vs</p><p>这里不提供vm虚拟机的安装教程，关于vm虚拟机安装请自行百度。后面可能有涉及到一些常用命令，可能会解释可能不会解释，未解释到位的请提出，或自行百度了解。</p><a id="more"></a><h2 id="第二步：虚拟机创建"><a href="#第二步：虚拟机创建" class="headerlink" title="第二步：虚拟机创建"></a>第二步：虚拟机创建</h2><p>首先创建虚拟机，看图就好</p><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装2.png" title="默认典型直接下一步"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装3.png" title="选择自己的系统镜像"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装3.png" title="选择自己的系统镜像，然后点击下一步"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装5.png" title="名字可以随便取"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装6.png" title="磁盘看自己需要给大小"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装7.png" title="创建后开启取消掉"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装8.png" title="这里按照自己电脑性能改下内存"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装9.png" title="接着是处理器"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装10.png" title="然后是网络"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装11.png" title="最后移除没用的硬件"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装12.png" title="然后退回上级点完成"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装13.png" title="开启虚拟机"><h2 id="第三步：安装centos7系统"><a href="#第三步：安装centos7系统" class="headerlink" title="第三步：安装centos7系统"></a>第三步：安装centos7系统</h2><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装14.png" title="选择语言"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装15.png"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装16.png" title="打感叹号的点进去一下"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装17.png" title="因为是自动分区所以已经分好了"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装18.png" title="设置好后我们开始安装"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装19.png" title="设置一下root用户的密码"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装20.png" title="设置好好点击完成"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装21.png" title="然后等一会"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装22.png" title="安装完成以后我们点击重启"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装23.png" title="直接回车即可"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装25.png" title="输入root用户密码"><img src="/2019/01/29/虚拟机下Linux基本安装/centos安装26.png" title="登录成功">]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;第一步：工具准备&quot;&gt;&lt;a href=&quot;#第一步：工具准备&quot; class=&quot;headerlink&quot; title=&quot;第一步：工具准备&quot;&gt;&lt;/a&gt;第一步：工具准备&lt;/h2&gt;&lt;p&gt;所需要的工具有，vm虚拟机安装包，centos7发行版本，ok就这些，这里选择centos发行版本的原因是一般企业级的服务器都是他，7版本是最新版本，很多企业级也开始更换为最新版本。&lt;/p&gt;
+&lt;p&gt;这里我提供centos和vm虚拟机破解版的百度网盘链接 链接: &lt;a href=&quot;https://pan.baidu.com/s/1oU26U89LP71OMX1PGfkHTg&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://pan.baidu.com/s/1oU26U89LP71OMX1PGfkHTg&lt;/a&gt; 提取码: 98vs&lt;/p&gt;
+&lt;p&gt;这里不提供vm虚拟机的安装教程，关于vm虚拟机安装请自行百度。后面可能有涉及到一些常用命令，可能会解释可能不会解释，未解释到位的请提出，或自行百度了解。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="服务器" scheme="http://yoursite.com/categories/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="vm虚拟机" scheme="http://yoursite.com/tags/vm%E8%99%9A%E6%8B%9F%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>带图片的博客</title>
+    <link href="http://yoursite.com/2019/01/29/%E5%B8%A6%E5%9B%BE%E7%89%87%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2019/01/29/带图片的博客/</id>
+    <published>2019-01-29T06:11:35.000Z</published>
+    <updated>2019-01-29T06:13:26.174Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="这里是带图片的博客"><a href="#这里是带图片的博客" class="headerlink" title="这里是带图片的博客"></a>这里是带图片的博客</h3><blockquote><p>这里我会显示一张图片</p><img src="/2019/01/29/带图片的博客/示例.jpg" title="由于hexo会把代码解析，所以此处用图片展示"></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;这里是带图片的博客&quot;&gt;&lt;a href=&quot;#这里是带图片的博客&quot; class=&quot;headerlink&quot; title=&quot;这里是带图片的博客&quot;&gt;&lt;/a&gt;这里是带图片的博客&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;这里我会显示一张图片&lt;/p&gt;
+&lt;img src=&quot;/201
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
