@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[虚拟机下Linux基本安装]]></title>
+    <url>%2F2019%2F01%2F29%2F%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8BLinux%E5%9F%BA%E6%9C%AC%E5%AE%89%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[第一步：工具准备所需要的工具有，vm虚拟机安装包，centos7发行版本，ok就这些，这里选择centos发行版本的原因是一般企业级的服务器都是他，7版本是最新版本，很多企业级也开始更换为最新版本。 这里我提供centos和vm虚拟机破解版的百度网盘链接 链接: https://pan.baidu.com/s/1oU26U89LP71OMX1PGfkHTg 提取码: 98vs 这里不提供vm虚拟机的安装教程，关于vm虚拟机安装请自行百度。后面可能有涉及到一些常用命令，可能会解释可能不会解释，未解释到位的请提出，或自行百度了解。 第二步：虚拟机创建首先创建虚拟机，看图就好 第三步：安装centos7系统]]></content>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[带图片的博客]]></title>
     <url>%2F2019%2F01%2F29%2F%E5%B8%A6%E5%9B%BE%E7%89%87%E7%9A%84%E5%8D%9A%E5%AE%A2%2F</url>
     <content type="text"><![CDATA[这里是带图片的博客 这里我会显示一张图片]]></content>
