@@ -8,8 +8,16 @@
     </url>
 
     <url>
+        <loc>http://yoursite.com/2019/03/20/springBoot%E7%AE%80%E5%8D%95%E9%9B%86%E6%88%902-Mybatis-Druid%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE/</loc>
+        <lastmod>2019-03-20T02:27:16.711Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://yoursite.com/2019/03/18/springboot%E7%AE%80%E5%8D%95%E9%9B%86%E6%88%901/</loc>
-        <lastmod>2019-03-19T01:13:52.783Z</lastmod>
+        <lastmod>2019-03-19T01:15:38.756Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
