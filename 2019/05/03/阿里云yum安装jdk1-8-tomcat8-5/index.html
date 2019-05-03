@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,jdk,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="byblog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="阿里云安装jdk介绍Linux下安装jdk有几种方式 这里使用yum安装 源命令安装">
+<meta name="keywords" content="Linux,jdk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云yum安装jdk1.8,tomcat8.5">
+<meta property="og:url" content="http://yoursite.com/2019/05/03/阿里云yum安装jdk1-8-tomcat8-5/index.html">
+<meta property="og:site_name" content="byblog">
+<meta property="og:description" content="阿里云安装jdk介绍Linux下安装jdk有几种方式 这里使用yum安装 源命令安装">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-03T10:20:41.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿里云yum安装jdk1.8,tomcat8.5">
+<meta name="twitter:description" content="阿里云安装jdk介绍Linux下安装jdk有几种方式 这里使用yum安装 源命令安装">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"shrinkIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"flipBounceXIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/03/阿里云yum安装jdk1-8-tomcat8-5/">
+
+
+
+
+
+  <title>阿里云yum安装jdk1.8,tomcat8.5 | byblog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?2167d7e38595df3e47fa7ff0db2c34f2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">byblog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/03/阿里云yum安装jdk1-8-tomcat8-5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ccsert">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/face.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="byblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">阿里云yum安装jdk1.8,tomcat8.5</h1>
+        
+
+        <div class="post-meta">
+		
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-03T18:15:39+08:00">
+                2019-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/05/03/阿里云yum安装jdk1-8-tomcat8-5/" class="leancloud_visitors" data-flag-title="阿里云yum安装jdk1.8,tomcat8.5">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="阿里云安装jdk"><a href="#阿里云安装jdk" class="headerlink" title="阿里云安装jdk"></a>阿里云安装jdk</h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Linux下安装jdk有几种方式</p>
+<p>这里使用yum安装 源命令安装</p>
+<a id="more"></a>
+<h2 id="yum源命令安装及配置"><a href="#yum源命令安装及配置" class="headerlink" title="yum源命令安装及配置"></a>yum源命令安装及配置</h2><h3 id="1-安装jdk"><a href="#1-安装jdk" class="headerlink" title="1.安装jdk"></a>1.安装jdk</h3><p>我这里是使用的centos7系统，其它的Linux发行版本其实也差不多的</p>
+<p>先用ssh远程工具连接服务器</p>
+<p>然后执行几条命令查看一下系统是否自带jdk</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# rpm -qa |grep java</span><br><span class="line">[root@ccsert home]# rpm -qa |grep jdk</span><br><span class="line">[root@ccsert home]# rpm -qa |grep gcj</span><br></pre></td></tr></table></figure>
+<p>这里没有提示就代表没有自带jdk，其实阿里云上装的centos都是纯净的一般不会多什么东西</p>
+<p>假如发现有提示就把它卸载掉，命令如下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# rpm -qa | grep java | xargs rpm -e --nodeps</span><br></pre></td></tr></table></figure>
+<p>然后我们先更新一下yum源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# yum update</span><br></pre></td></tr></table></figure>
+<p>有提示就填<code>y</code></p>
+<p>然后查看一下有哪些jdk版本可以安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# yum list java*</span><br></pre></td></tr></table></figure>
+<p>提示有如下包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">Loaded plugins: fastestmirror</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line">Available Packages</span><br><span class="line">java-1.6.0-openjdk.x86_64                                                                          1:1.6.0.41-1.13.13.1.el7_3                                                      base   </span><br><span class="line">java-1.6.0-openjdk-demo.x86_64                                                                     1:1.6.0.41-1.13.13.1.el7_3                                                      base   </span><br><span class="line">java-1.6.0-openjdk-devel.x86_64                                                                    1:1.6.0.41-1.13.13.1.el7_3                                                      base   </span><br><span class="line">java-1.6.0-openjdk-javadoc.x86_64                                                                  1:1.6.0.41-1.13.13.1.el7_3                                                      base   </span><br><span class="line">java-1.6.0-openjdk-src.x86_64                                                                      1:1.6.0.41-1.13.13.1.el7_3                                                      base   </span><br><span class="line">java-1.7.0-openjdk.x86_64                                                                          1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.7.0-openjdk-accessibility.x86_64                                                            1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.7.0-openjdk-demo.x86_64                                                                     1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.7.0-openjdk-devel.x86_64                                                                    1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.7.0-openjdk-headless.x86_64                                                                 1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.7.0-openjdk-javadoc.noarch                                                                  1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.7.0-openjdk-src.x86_64                                                                      1:1.7.0.211-2.6.17.1.el7_6                                                      updates</span><br><span class="line">java-1.8.0-openjdk.i686                                                                            1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk.x86_64                                                                          1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-accessibility.i686                                                              1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-accessibility.x86_64                                                            1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-accessibility-debug.i686                                                        1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-accessibility-debug.x86_64                                                      1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-debug.i686                                                                      1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-debug.x86_64                                                                    1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-demo.i686                                                                       1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-demo.x86_64                                                                     1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-demo-debug.i686                                                                 1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-demo-debug.x86_64                                                               1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-devel.i686                                                                      1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-devel.x86_64                                                                    1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-devel-debug.i686                                                                1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-devel-debug.x86_64                                                              1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-headless.i686                                                                   1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-headless.x86_64                                                                 1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-headless-debug.i686                                                             1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-headless-debug.x86_64                                                           1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-javadoc.noarch                                                                  1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-javadoc-debug.noarch                                                            1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-javadoc-zip.noarch                                                              1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-javadoc-zip-debug.noarch                                                        1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-src.i686                                                                        1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-src.x86_64                                                                      1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-src-debug.i686                                                                  1:1.8.0.191.b12-1.el7_6                                                         updates</span><br><span class="line">java-1.8.0-openjdk-src-debug.x86_64                                                                1:1.8.0.201.b09-2.el7_6                                                         updates</span><br><span class="line">java-11-openjdk.i686                                                                               1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk.x86_64                                                                             1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-debug.i686                                                                         1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-debug.x86_64                                                                       1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-demo.i686                                                                          1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-demo.x86_64                                                                        1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-demo-debug.i686                                                                    1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-demo-debug.x86_64                                                                  1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-devel.i686                                                                         1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-devel.x86_64                                                                       1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-devel-debug.i686                                                                   1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-devel-debug.x86_64                                                                 1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-headless.i686                                                                      1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-headless.x86_64                                                                    1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-headless-debug.i686                                                                1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-headless-debug.x86_64                                                              1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc.i686                                                                       1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc.x86_64                                                                     1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc-debug.i686                                                                 1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc-debug.x86_64                                                               1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc-zip.i686                                                                   1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc-zip.x86_64                                                                 1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc-zip-debug.i686                                                             1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-javadoc-zip-debug.x86_64                                                           1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-jmods.i686                                                                         1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-jmods.x86_64                                                                       1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-jmods-debug.i686                                                                   1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-jmods-debug.x86_64                                                                 1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-src.i686                                                                           1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-src.x86_64                                                                         1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-src-debug.i686                                                                     1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-11-openjdk-src-debug.x86_64                                                                   1:11.0.2.7-0.el7_6                                                              updates</span><br><span class="line">java-atk-wrapper.i686                                                                              0.30.4-5.el7                                                                    base   </span><br><span class="line">java-atk-wrapper.x86_64                                                                            0.30.4-5.el7                                                                    base   </span><br><span class="line">java-dirq.noarch                                                                                   1.8-1.el7                                                                       epel   </span><br><span class="line">java-dirq-javadoc.noarch                                                                           1.8-1.el7                                                                       epel   </span><br><span class="line">java-oauth.noarch                                                                                  20100601-13.el7                                                                 epel   </span><br><span class="line">java-oauth-javadoc.noarch                                                                          20100601-13.el7                                                                 epel   </span><br><span class="line">java-runtime-decompiler.noarch                                                                     2.0-5.el7                                                                       epel   </span><br><span class="line">java-runtime-decompiler-javadoc.noarch                                                             2.0-5.el7                                                                       epel   </span><br><span class="line">java_cup.noarch                                                                                    1:0.11a-16.el7                                                                  base   </span><br><span class="line">java_cup-javadoc.noarch                                                                            1:0.11a-16.el7                                                                  base   </span><br><span class="line">java_cup-manual.noarch                                                                             1:0.11a-16.el7                                                                  base   </span><br><span class="line">javacc.noarch                                                                                      5.0-10.el7                                                                      base   </span><br><span class="line">javacc-demo.noarch                                                                                 5.0-10.el7                                                                      base   </span><br><span class="line">javacc-javadoc.noarch                                                                              5.0-10.el7                                                                      base   </span><br><span class="line">javacc-manual.noarch                                                                               5.0-10.el7                                                                      base   </span><br><span class="line">javacc-maven-plugin.noarch                                                                         2.6-17.el7                                                                      base   </span><br><span class="line">javacc-maven-plugin-javadoc.noarch                                                                 2.6-17.el7                                                                      base   </span><br><span class="line">javamail.noarch                                                                                    1.4.6-8.el7                                                                     base   </span><br><span class="line">javamail-javadoc.noarch                                                                            1.4.6-8.el7                                                                     base   </span><br><span class="line">javapackages-tools.noarch                                                                          3.4.1-11.el7                                                                    base   </span><br><span class="line">javaparser.noarch                                                                                  1.0.11-3.el7                                                                    epel   </span><br><span class="line">javaparser-javadoc.noarch                                                                          1.0.11-3.el7                                                                    epel   </span><br><span class="line">javassist.noarch                                                                                   3.16.1-10.el7                                                                   base   </span><br><span class="line">javassist-javadoc.noarch                                                                           3.16.1-10.el7                                                                   base   </span><br><span class="line">javastroke.x86_64                                                                                  0.5.1-33.el7                                                                    epel   </span><br><span class="line">javawriter.noarch                                                                                  2.5.1-4.el7                                                                     epel   </span><br><span class="line">javawriter-javadoc.noarch                                                                          2.5.1-4.el7                                                                     epel</span><br></pre></td></tr></table></figure>
+<p>我们安装jdk1.8版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# yum install java-1.8.0-openjdk-devel.x86_64 -y</span><br></pre></td></tr></table></figure>
+<p>我们只安装开发包，其余的文档之类的什么的都不需要，当然这个根据你的系统架构来安装</p>
+<p>比如我的是x86_64的架构</p>
+<p>假如要查看自己是什么架构，使用下面的命令就好了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# uname -m</span><br><span class="line">x86_64</span><br></pre></td></tr></table></figure>
+<p>然后开始安装</p>
+<p>最后显示<code>Complete!</code>就代表安装成功了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# java -version</span><br><span class="line">openjdk version "1.8.0_201"</span><br><span class="line">OpenJDK Runtime Environment (build 1.8.0_201-b09)</span><br><span class="line">OpenJDK 64-Bit Server VM (build 25.201-b09, mixed mode)</span><br></pre></td></tr></table></figure>
+<p>查看版本，没问题</p>
+<p>这个时候其实是可以直接使用了，但是还需要配置环境变量</p>
+<h3 id="2-配置环境变量"><a href="#2-配置环境变量" class="headerlink" title="2.配置环境变量"></a>2.配置环境变量</h3><p>使用yum安装，jdk和jre默认是在<code>/usr/lib/jvm</code>目录下</p>
+<p>进入目录查看一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert jvm]# ls</span><br><span class="line">java        java-1.8.0-openjdk                               java-openjdk  jre-1.8.0          jre-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64</span><br><span class="line">java-1.8.0  java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64  jre           jre-1.8.0-openjdk  jre-openjdk</span><br></pre></td></tr></table></figure>
+<p>一般这最长的就是jdk了，也就是我们配置需要用的东西</p>
+<p>不确定？我们进去看一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert jvm]# cd java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64</span><br><span class="line">[root@ccsert java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64]# ls</span><br><span class="line">bin  include  jre  lib  tapset</span><br></pre></td></tr></table></figure>
+<p>是不是熟悉的感觉,<code>bin</code>,<code>jre</code>,<code>lib</code>之类的</p>
+<p>进入<code>bin</code>目录我们能看见javac和java还有<code>javap</code>指令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64]# cd bin</span><br><span class="line">[root@ccsert bin]# ls</span><br><span class="line">appletviewer  jar        javac    javap         jconsole  jhat   jmap        jsadebugd  jstatd        orbd        rmic         schemagen   tnameserv  wsimport</span><br><span class="line">extcheck      jarsigner  javadoc  java-rmi.cgi  jdb       jinfo  jps         jstack     keytool       pack200     rmid         serialver   unpack200  xjc</span><br><span class="line">idlj          java       javah    jcmd          jdeps     jjs    jrunscript  jstat      native2ascii  policytool  rmiregistry  servertool  wsgen</span><br></pre></td></tr></table></figure>
+<p>清楚以后我们开始配置环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert bin]# vi /etc/profile</span><br></pre></td></tr></table></figure>
+<p>然后将光标移动到最后按<code>i</code>添加如下信息，我们每个人的版本可能不太一样也就是文件命不一样，根据自己的文件名来改</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>jdk_home path</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JAVA_HOME/jre/lib/rt.jar</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br></pre></td></tr></table></figure>
+<p>然后按<code>:</code>,在输入<code>wq</code>回车，就是保存并退出</p>
+<p>接着我们让配置即时生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert bin]# . /etc/profile</span><br></pre></td></tr></table></figure>
+<p>最后验证一下配置，其实用一下Javac就可以了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert bin]# javac</span><br><span class="line">Usage: javac &lt;options&gt; &lt;source files&gt;</span><br><span class="line">where possible options include:</span><br><span class="line">  -g                         Generate all debugging info</span><br><span class="line">  -g:none                    Generate no debugging info</span><br><span class="line">  -g:&#123;lines,vars,source&#125;     Generate only some debugging info</span><br><span class="line">  -nowarn                    Generate no warnings</span><br><span class="line">  -verbose                   Output messages about what the compiler is doing</span><br><span class="line">  -deprecation               Output source locations where deprecated APIs are used</span><br><span class="line">  -classpath &lt;path&gt;          Specify where to find user class files and annotation processors</span><br><span class="line">  -cp &lt;path&gt;                 Specify where to find user class files and annotation processors</span><br><span class="line">  -sourcepath &lt;path&gt;         Specify where to find input source files</span><br><span class="line">  -bootclasspath &lt;path&gt;      Override location of bootstrap class files</span><br><span class="line">  -extdirs &lt;dirs&gt;            Override location of installed extensions</span><br><span class="line">  -endorseddirs &lt;dirs&gt;       Override location of endorsed standards path</span><br><span class="line">  -proc:&#123;none,only&#125;          Control whether annotation processing and/or compilation is done.</span><br><span class="line">  -processor &lt;class1&gt;[,&lt;class2&gt;,&lt;class3&gt;...] Names of the annotation processors to run; bypasses default discovery process</span><br><span class="line">  -processorpath &lt;path&gt;      Specify where to find annotation processors</span><br><span class="line">  -parameters                Generate metadata for reflection on method parameters</span><br><span class="line">  -d &lt;directory&gt;             Specify where to place generated class files</span><br><span class="line">  -s &lt;directory&gt;             Specify where to place generated source files</span><br><span class="line">  -h &lt;directory&gt;             Specify where to place generated native header files</span><br><span class="line">  -implicit:&#123;none,class&#125;     Specify whether or not to generate class files for implicitly referenced files</span><br><span class="line">  -encoding &lt;encoding&gt;       Specify character encoding used by source files</span><br><span class="line">  -source &lt;release&gt;          Provide source compatibility with specified release</span><br><span class="line">  -target &lt;release&gt;          Generate class files for specific VM version</span><br><span class="line">  -profile &lt;profile&gt;         Check that API used is available in the specified profile</span><br><span class="line">  -version                   Version information</span><br><span class="line">  -help                      Print a synopsis of standard options</span><br><span class="line">  -Akey[=value]              Options to pass to annotation processors</span><br><span class="line">  -X                         Print a synopsis of nonstandard options</span><br><span class="line">  -J&lt;flag&gt;                   Pass &lt;flag&gt; directly to the runtime system</span><br><span class="line">  -Werror                    Terminate compilation if warnings occur</span><br><span class="line">  @&lt;filename&gt;                Read options and filenames from file</span><br></pre></td></tr></table></figure>
+<p>到这里基本就结束了，可以部署工程了</p>
+<h2 id="tomcat8-5安装"><a href="#tomcat8-5安装" class="headerlink" title="tomcat8.5安装"></a>tomcat8.5安装</h2><p>用yum安装程序的确方便，不过tomcat并不在yum源中，所以我们需要去官网下载</p>
+<p>先进入home目录，把文件下载到home目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert ~]# cd /home</span><br><span class="line">[root@ccsert home]#  wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz</span><br><span class="line">--2019-04-19 09:41:39--  http://mirror.bit.edu.cn/apache/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz</span><br><span class="line">Resolving mirror.bit.edu.cn (mirror.bit.edu.cn)... 219.143.204.117, 202.204.80.77, 2001:da8:204:2001:250:56ff:fea1:22</span><br><span class="line">Connecting to mirror.bit.edu.cn (mirror.bit.edu.cn)|219.143.204.117|:80... connected.</span><br><span class="line">HTTP request sent, awaiting response... 200 OK</span><br><span class="line">Length: 9690027 (9.2M) [application/octet-stream]</span><br><span class="line">Saving to: ‘apache-tomcat-8.5.40.tar.gz’</span><br><span class="line"></span><br><span class="line"><span class="meta">100%</span>[================================================================================================================================================&gt;] 9,690,027   10.3MB/s   in 0.9s   </span><br><span class="line"></span><br><span class="line">2019-04-19 09:41:40 (10.3 MB/s) - ‘apache-tomcat-8.5.40.tar.gz’ saved [9690027/9690027]</span><br></pre></td></tr></table></figure>
+<p>然后解压到opt目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert home]# tar -zxvf apache-tomcat-8.5.40.tar.gz</span><br><span class="line">[root@ccsert home]# mv apache-tomcat-8.5.40 /opt/tomcat8.5</span><br><span class="line">[root@ccsert home]# cd /opt/tomcat8.5</span><br></pre></td></tr></table></figure>
+<p>看一下tomcat的目录结构</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert tomcat8.5]# ll</span><br><span class="line">total 144</span><br><span class="line">drwxr-x--- 2 root root  4096 Apr 19 09:46 bin</span><br><span class="line">-rw-r----- 1 root root 19539 Apr 10 22:33 BUILDING.txt</span><br><span class="line">drwx------ 2 root root  4096 Apr 10 22:33 conf</span><br><span class="line">-rw-r----- 1 root root  6090 Apr 10 22:33 CONTRIBUTING.md</span><br><span class="line">drwxr-x--- 2 root root  4096 Apr 19 09:46 lib</span><br><span class="line">-rw-r----- 1 root root 57092 Apr 10 22:33 LICENSE</span><br><span class="line">drwxr-x--- 2 root root  4096 Apr 10 22:31 logs</span><br><span class="line">-rw-r----- 1 root root  1726 Apr 10 22:33 NOTICE</span><br><span class="line">-rw-r----- 1 root root  3255 Apr 10 22:33 README.md</span><br><span class="line">-rw-r----- 1 root root  7139 Apr 10 22:33 RELEASE-NOTES</span><br><span class="line">-rw-r----- 1 root root 16262 Apr 10 22:33 RUNNING.txt</span><br><span class="line">drwxr-x--- 2 root root  4096 Apr 19 09:46 temp</span><br><span class="line">drwxr-x--- 7 root root  4096 Apr 10 22:31 webapps</span><br><span class="line">drwxr-x--- 2 root root  4096 Apr 10 22:31 work</span><br></pre></td></tr></table></figure>
+<p>还是熟悉的样子</p>
+<p>这个时候已经可以直接启动tomcat了，但是没有优化的tomcat启动速度是相当慢的，为此我们稍微优化一下</p>
+<h2 id="tomcat基础优化"><a href="#tomcat基础优化" class="headerlink" title="tomcat基础优化"></a>tomcat基础优化</h2><p>###1.tomcat删除webapps下的自带项目</p>
+<p>进入tomcat目录，然后执行你们最喜欢的<code>rm -rf</code>命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@ccsert tomcat8.5]# rm -rf webapps/*</span><br></pre></td></tr></table></figure>
+<p>然我们在配置一下启动模式</p>
+<p>###2.tomcat非阻塞io配置</p>
+<p>tomcat有三种运行模式</p>
+<p><code>bio</code>,<code>nio</code>,<code>apr</code></p>
+<p>默认是bio模式，该模式性能非常低下，没有经过任何优化处理和支持，<code>bio</code>也就是阻塞io</p>
+<p>第二种模式提供了非阻塞io，第三种模式是性能最好的，但是配置困难这里就不说了</p>
+<p>我们这里配置nio模式</p>
+<p>编辑<code>server.xml</code>的<code>Connector</code>节点，修改<code>protocol</code>为<code>org.apache.coyote.http11.Http11NioProtocol</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"80"</span> <span class="attr">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11NioProtocol"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span></span></span><br><span class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">"8443"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这里顺便把端口号也改成了80</p>
+<p>然后保存退出</p>
+<p>我们启动一下tomcat看看</p>
+<p>进入<code>cd /opt/tomcat8.5/bin</code></p>
+<p>然后执行启动脚本<code>sh startup.sh</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Using CATALINA_BASE:   /opt/tomcat8.5</span><br><span class="line">Using CATALINA_HOME:   /opt/tomcat8.5</span><br><span class="line">Using CATALINA_TMPDIR: /opt/tomcat8.5/temp</span><br><span class="line">Using JRE_HOME:        /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.201.b09-2.el7_6.x86_64</span><br><span class="line">Using CLASSPATH:       /opt/tomcat8.5/bin/bootstrap.jar:/opt/tomcat8.5/bin/tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
+<p>看见tomcat started就代表启动中</p>
+<p>我们可以查看一下tomcat实时的日志</p>
+<p>进入<code>cd /opt/tomcat8.5/logs/</code></p>
+<p>然后执行<code>tail -f catalina.out</code></p>
+<p>等待启动完成</p>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">19</span>-Apr-<span class="number">2019</span> <span class="number">14</span>:<span class="number">49</span>:<span class="number">41</span><span class="variable">.296</span> INFO [main] org<span class="variable">.apache</span><span class="variable">.coyote</span><span class="variable">.AbstractProtocol</span><span class="variable">.start</span> Starting ProtocolHandler [<span class="string">"http-nio-8080"</span>]</span><br><span class="line"><span class="number">19</span>-Apr-<span class="number">2019</span> <span class="number">14</span>:<span class="number">49</span>:<span class="number">41</span><span class="variable">.350</span> INFO [main] org<span class="variable">.apache</span><span class="variable">.coyote</span><span class="variable">.AbstractProtocol</span><span class="variable">.start</span> Starting ProtocolHandler [<span class="string">"ajp-nio-8009"</span>]</span><br><span class="line"><span class="number">19</span>-Apr-<span class="number">2019</span> <span class="number">14</span>:<span class="number">49</span>:<span class="number">41</span><span class="variable">.352</span> INFO [main] org<span class="variable">.apache</span><span class="variable">.catalina</span><span class="variable">.startup</span><span class="variable">.Catalina</span><span class="variable">.start</span> Server startup in <span class="number">114</span> ms</span><br></pre></td></tr></table></figure>
+<p>可以看见我们已经是通过<code>nio</code>模式启动了</p>
+<p>速度已经算比较快了。</p>
+<p>到此为止我们就安装完了<code>jdk1.8</code>和<code>tomcat8.5</code></p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+	 
+    
+
+    
+ <div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------本文结束
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div>
+		
+	 </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i>
+ Linux</a>
+          
+            <a href="/tags/jdk/" rel="tag"><i class="fa fa-tag"></i>
+ jdk</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/springBoot简单集成2-Mybatis-Druid多数据源配置/" rel="next" title="springBoot简单集成2(Mybatis+Druid多数据源配置)">
+                <i class="fa fa-chevron-left"></i> springBoot简单集成2(Mybatis+Druid多数据源配置)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MjQwOC8xODk1NQ=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/face.jpg" alt="ccsert">
+            
+              <p class="site-author-name" itemprop="name">ccsert</p>
+              <p class="site-description motion-element" itemprop="description">冰言的博客</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ccsert" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1942194377qq@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://wpa.qq.com/msgrd?v=3&uin=1942194377&site=qq&menu=yes" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-qq"></i>QQ</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.facebook.com/yu.duan.ccsert" target="_blank" title="FB Page">
+                      
+                        <i class="fa fa-fw fa-facebook"></i>FB Page</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#阿里云安装jdk"><span class="nav-number">1.</span> <span class="nav-text">阿里云安装jdk</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yum源命令安装及配置"><span class="nav-number">1.2.</span> <span class="nav-text">yum源命令安装及配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装jdk"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.安装jdk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置环境变量"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat8-5安装"><span class="nav-number">1.3.</span> <span class="nav-text">tomcat8.5安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tomcat基础优化"><span class="nav-number">1.4.</span> <span class="nav-text">tomcat基础优化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ccsert</span>
+
+  
+</div>
+
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <!--<span class="post-meta-divider">|</span>-->
+
+
+
+ <!-- <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>-->
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("M5GBiRbFM0o1C7wjQYEbNcuT-gzGzoHsz", "K8E3253EG5LztWqRMoDXGwmS");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
